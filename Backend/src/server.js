@@ -21,7 +21,7 @@ app.use(cors({
 
 app.use("/api/notes", notesRoutes);
 
-const frontendPath = path.join(__dirname, 'Frontend', 'dist');
+const frontendPath = path.join(__dirname, '..', 'Frontend', 'dist');
 
 app.use(express.static(frontendPath));
 app.get(/.*/, (req, res, next) => {
