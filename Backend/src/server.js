@@ -14,11 +14,11 @@ const PORT = process.env.PORT || 5000;
 const __dirname = path.resolve();
 
 app.use(express.json());    // Middleware to parse JSON request bodies
-app.use(rateLimiter);
 app.use(cors({
     origin: 'http://localhost:5173',
 }));
 
+app.use('/api', rateLimiter);
 app.use("/api/notes", notesRoutes);
 
 const frontendPath = path.join(__dirname, '..', 'Frontend', 'dist');
