@@ -15,7 +15,7 @@ const __dirname = path.resolve();
 
 app.use(express.json());    // Middleware to parse JSON request bodies
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: process.env.NODE_ENV === 'production' ? true : 'http://localhost:5173',
 }));
 
 app.use('/api', rateLimiter);
