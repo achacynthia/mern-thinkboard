@@ -21,12 +21,18 @@ app.use(cors({
 
 app.use("/api/notes", notesRoutes);
 
-if(process.env.NODE_ENV === 'production') {
-    app.use(
-        cors({
-            origin: 'http://localhost:5173',
-        })
-    )
+if (process.env.NODE_ENV === 'production') {
+    const frontendPath = path.join(__dirname, 'Frontend', 'dist');
+
+    app.use(express.static(frontendPath));
+    app.get(/.*/, (req, res, next) => {
+        if (req.path.startsWith('/api/')) {
+            next();
+            return;
+        }
+
+        res.sendFile(path.join(frontendPath, 'index.html'));
+    });
 }
 
 
@@ -36,7 +42,7 @@ connectdb().then(() => {
         console.log(`Server is running on port ${PORT}`);
     });
 })
-    
+
 
 
 // 1:17:41

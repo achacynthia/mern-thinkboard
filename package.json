@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "concurrently \"npm run dev --prefix Backend\" \"npm run dev --prefix Frontend\"",
     "build": "npm install --prefix Backend && npm install --prefix Frontend && npm run build --prefix Frontend",
-    "start": "npm run start --prefix Backend"
+    "start": "NODE_ENV=production npm run start --prefix Backend"
   },
   "keywords": [],
   "author": "",
