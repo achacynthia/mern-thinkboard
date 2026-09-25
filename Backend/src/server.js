@@ -21,19 +21,17 @@ app.use(cors({
 
 app.use("/api/notes", notesRoutes);
 
-if (process.env.NODE_ENV === 'production') {
-    const frontendPath = path.join(__dirname, 'Frontend', 'dist');
+const frontendPath = path.join(__dirname, 'Frontend', 'dist');
 
-    app.use(express.static(frontendPath));
-    app.get(/.*/, (req, res, next) => {
-        if (req.path.startsWith('/api/')) {
-            next();
-            return;
-        }
+app.use(express.static(frontendPath));
+app.get(/.*/, (req, res, next) => {
+    if (req.path.startsWith('/api/')) {
+        next();
+        return;
+    }
 
-        res.sendFile(path.join(frontendPath, 'index.html'));
-    });
-}
+    res.sendFile(path.join(frontendPath, 'index.html'));
+});
 
 
 
